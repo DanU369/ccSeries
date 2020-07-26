@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Favorites</title>
+</head>
+<body>
+<h1>Your favorite shows are:</h1>
+    {% for title in data %}
+    <p>{{ title.title }}</p>
+{% endfor %}
+</body>
+</html>

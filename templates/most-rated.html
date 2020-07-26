@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block content %}
+    <table style="width:100%">
+    <thead>
+            <tr>
+                {% if sort == 'title' and order=='desc' %}
+                <th data-checkbox="true"><a href="/shows/most-rated/{{ pgNumber }}/sortBy/title/asc">Title<i class="fa fa-sort-desc" style="color :black"></i></a></th>
+                {% elif sort == 'title' and order=='asc' %}
+                <th data-checkbox="true"><a href="/shows/most-rated/{{ pgNumber }}/sortBy/title/desc">Title<i class="fa fa-sort-asc" style="color :black"></i></a></th>
+                {% else %}
+                <th data-checkbox="true"><a href="/shows/most-rated/{{ pgNumber }}/sortBy/title/asc">Title<i class="fa fa-sort" style="color :black"></i></a></th>
+                {% endif %}
+                {% if sort == 'releaseYear' and order=='desc'%}
+                <th data-checkbox="true"><a href="/shows/most-rated/{{ pgNumber }}/sortBy/releaseYear/asc">Release year<i class="fa fa-sort-desc" style="color :black"></i></a></th>
+                {% elif sort == 'releaseYear' and order=='asc' %}
+                <th data-checkbox="true"><a href="/shows/most-rated/{{ pgNumber }}/sortBy/releaseYear/desc">Release year<i class="fa fa-sort-asc" style="color :black"></i></a></th>
+                {% else %}
+                <th data-checkbox="true"><a href="/shows/most-rated/{{ pgNumber }}/sortBy/releaseYear/asc">Release year<i class="fa fa-sort" style="color :black"></i></a></th>
+                {% endif %}
+                {% if sort == 'runtime' and order=='desc'%}
+                <th data-checkbox="true"><a href="/shows/most-rated/{{ pgNumber }}/sortBy/runtime/asc">Runtime<i class="fa fa-sort-desc" style="color :black"></i></a></th>
+                {% elif sort == 'runtime' and order=='asc' %}
+                <th data-checkbox="true"><a href="/shows/most-rated/{{ pgNumber }}/sortBy/runtime/desc">Runtime<i class="fa fa-sort-asc" style="color :black"></i></a></th>
+                {% else %}
+                <th data-checkbox="true"><a href="/shows/most-rated/{{ pgNumber }}/sortBy/runtime/asc">Runtime<i class="fa fa-sort" style="color :black"></i></a></th>
+                {% endif %}
+                {% if sort == 'rating' and order=='desc'%}
+                <th data-checkbox="true"><a href="/shows/most-rated/{{ pgNumber }}/sortBy/rating/asc">Rating<i class="fa fa-sort-desc" style="color :black"></i></a></th>
+                {% elif sort == 'rating' and order=='asc' %}
+                <th data-checkbox="true"><a href="/shows/most-rated/{{ pgNumber }}/sortBy/rating/desc">Rating<i class="fa fa-sort-asc" style="color :black"></i></a></th>
+                {% else %}
+                <th data-checkbox="true"><a href="/shows/most-rated/{{ pgNumber }}/sortBy/rating/asc">Rating<i class="fa fa-sort" style="color :black"></i></a></th>
+                {% endif %}
+                {% if sort == 'genres' and order=='desc' %}
+                <th data-checkbox="true"><a href="/shows/most-rated/{{ pgNumber }}/sortBy/genres/asc">Genres<i class="fa fa-sort-desc" style="color :black"></i></a></th>
+                {% elif sort == 'genres' and order=='asc' %}
+                <th data-checkbox="true"><a href="/shows/most-rated/{{ pgNumber }}/sortBy/genres/desc">Genres<i class="fa fa-sort-asc" style="color :black"></i></a></th>
+                {% else %}
+                <th data-checkbox="true"><a href="/shows/most-rated/{{ pgNumber }}/sortBy/genres/asc">Genres<i class="fa fa-sort" style="color :black"></i></a></th>
+                {% endif %}
+{#                <th data-checkbox="true" class="titlebtn asc">Title</th>#}
+{#                <th data-checkbox="true" class="yearbtn asc">Release year</th>#}
+{#                <th data-checkbox="true" class="runtimebtn asc">Runtime</th>#}
+{#                <th data-checkbox="true" class="ratingbtn asc">Rating</th>#}
+{#                <th data-checkbox="true" class="genresbtn asc">Genres</th>#}
+                <th colspan="2" data-checkbox="true">Urls</th>
+            </tr>
+    </thead>
+    <tbody class="data-container">
+        {% for data in most_rated_15_shows %}
+            <tr>
+                <td><a href="/tv-show/{{ data.id }}">{{ data.title }}</a></td>
+                <td>{{ data.year }}</td>
+                <td>{{ data.runtime }}</td>
+                <td>{{ data.rating }}</td>
+                <td>{{ data.genres }}</td>
+                {% if data.homepage == none %}
+                    <td>No Urls</td>
+                {% else %}
+                    <td><a href="{{ data.homepage }}">Homepage</a> <a href=" {{ data.trailer }}">Trailer</a></td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+<div class="pagination">
+{% if pgNumber != 1 %}
+  <a href="/shows/most-rated/{{ pgNumber - 1 }}">&laquo;</a>
+{% endif %}
+{% if pgNumber-2 > 0 %}
+  <a href="/shows/most-rated/{{ pgNumber - 2}}">{{ pgNumber - 2}}</a>
+{% endif %}
+{% if pgNumber-1 > 0 %}
+  <a href="/shows/most-rated/{{ pgNumber - 1}}">{{ pgNumber - 1}}</a>
+{% endif %}
+  <a class="active" href="/shows/most-rated/{{ pgNumber }}">{{ pgNumber }}</a>
+  <a href="/shows/most-rated/{{ pgNumber + 1}}">{{ pgNumber + 1}}</a>
+  <a href="/shows/most-rated/{{ pgNumber + 2}}">{{ pgNumber + 2}}</a>
+{% if pgNumber != 100 %}
+  <a href="/shows/most-rated/{{ pgNumber + 1 }}">&raquo;</a>
+{% endif %}
+</div>
+    <script src="/static/js/sort.js"></script>
+{% endblock %}

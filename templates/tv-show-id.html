@@ -1,0 +1,99 @@
+
+
+{% extends 'layout.html' %}
+
+{% block content %}
+
+{#{{ show }}#}
+{#    {{ genres }}#}
+        <section>
+
+        <div class="card detailed-view">
+            <div class="row">
+
+                <div class="col col-twothird">
+                    <h2>{{ show[1] }} ({{ show[2].year }})</h2>
+                {% if check == 0 and 'username' in session %}
+                    <button type="button" class="btn btn-success favButton" data-title="{{ show[1] }}" data-id="{{ show[0] }}">Add to favorites <i class="fa fa-star"></i></button>
+                {% endif %}
+                    <p class="small grayed">{{ show[4] }}min <span class="separator">|</span>
+                        {% for genre in genres %}
+                        {{ genre.name }},
+                        {% endfor %}
+                        <span class="separator">|</span> released on {{ show[2].day }}-{{ show[2].month }}-{{ show[2].year }}</p>
+                    <p>{{ show[3] }}</p>
+
+                </div>
+            </div>
+        {% for actor in top_3_actors %}
+            <br>
+    <button ><a href="/actors/{{ actor.name }}">{{ actor.name }}</a></button>
+<div class="content" style="display: none">
+  <p>{{ actor.biography }}</p>
+</div>
+
+        {% endfor %}
+        </div>
+
+{#        <div class="card">#}
+{#            <p>A form example to edit a TV show's episode:</p>#}
+{#            <form action="#" method="post">#}
+{#                <p class="form-element">#}
+{#                    <label class="form-element-label" for="form-example-show">Show:</label>#}
+{#                    <select name="show" id="form-example-show">#}
+{#                        <option value="">Game of Thrones (2011)</option>#}
+{#                        <option value="">Lost (2004)</option>#}
+{#                        <option value="">South Park (1997)</option>#}
+{#                        <option value="">How I met your mother (2005)</option>#}
+{#                        <option value="">Legion (2017)</option>#}
+{#                    </select>#}
+{#                </p>#}
+{#                <p class="form-element">#}
+{#                    <label class="form-element-label" for="form-example-season">Season:</label>#}
+{#                    <input type="number" name="season" id="form-example-season" value="" min="1" max="30">#}
+{#                </p>#}
+{#                <p class="form-element">#}
+{#                    <label class="form-element-label" for="form-example-episode">Episode:</label>#}
+{#                    <input type="number" name="episode" id="form-example-episode" value="" min="1" max="100">#}
+{#                </p>#}
+{#                <p class="form-element">#}
+{#                    <label class="form-element-label" for="form-example-title">Title:</label>#}
+{#                    <input type="text" name="name" id="form-example-title" value="" placeholder="What the pencake?">#}
+{#                </p>#}
+{#                <p class="form-element">#}
+{#                    <label class="form-element-label" for="form-example-length">Length:</label>#}
+{#                    <input type="number" name="length" id="form-example-length" value="" min="1" max="999">#}
+{#                    <span>min.</span>#}
+{#                </p>#}
+{#                <p class="text-center">#}
+{#                    <button type="submit">Submit</button>#}
+{#                </p>#}
+{#            </form>#}
+{#        </div>#}
+
+
+    <div class="commentsTable">
+        {% for comment in comments %}
+        <h1>{{ comment.comment }}</h1>
+            {% if session['user_id'] == comment.user_id %}
+        <a href="/tv-show/{{ show[0] }}/{{ comment.id }}/edit"><button type="button" class="btn btn-primary">Edit</button></a>
+                <a href="/tv-show/{{ show[0] }}/{{ comment.id }}/delete"><button type="button" class="btn btn-danger">Delete</button></a>
+            {% endif %}
+        {% endfor %}
+        </div>
+
+    {% if 'username' in session %}
+            <form action="/addComment" method="post">
+  <label for="comment">Add a comment:</label><br>
+  <input type="textarea" id="comment" name="comment"><br>
+  <input type="hidden" id="movieID" name="movieID" value="{{ show[0] }}"> <br>
+    <input type="submit" value="Submit">
+
+</form>
+        {% endif %}
+
+    </section>
+<script src="/static/js/actorsBiography.js"></script>
+<script src="/static/js/favorites.js"></script>
+<script src="/static/js/comments.js"></script>
+{% endblock %}

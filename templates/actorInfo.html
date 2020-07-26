@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+{% for role in actor %}
+    <li>Played in {{ role.title }} as {{ role.character_name }}</li>
+{% endfor %}
+</ul>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+
+    <form action="/tv-show/{{ id }}/{{ commID }}/edit" method="post">
+        <label for="comment">Edit your comment:</label><br>
+        <input type="textarea" id="comment" name="comment" value="{{ comment[0].comment }}"><br>
+        <input type="submit" value="Submit">
+    </form>
+
+</body>
+</html>

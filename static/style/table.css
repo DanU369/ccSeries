@@ -1,0 +1,52 @@
+table {
+    width: 100%;
+    margin-top: 10px;
+
+    border-spacing: 0;
+
+    border: 1px solid #278bc4;
+    border-radius: 3px;
+}
+
+table th {
+
+    background: #278bc4;
+}
+
+table td {
+    font-size: 13px;
+}
+
+table th,
+table td {
+    margin: 0;
+    padding: 6px;
+}
+
+table tr:nth-child(even) {
+    background: #fff;
+
+
+}
+
+table tr:nth-child(odd) {
+    color: #fff;
+
+
+}
+
+table tr:nth-child(odd) a{
+    color: #fff;
+
+}
+
+table tr:nth-child(even) a{
+    color: #278bc4;
+
+}
+
+
+table th.action-column {
+    background: rgb(203, 75, 70);
+}
+
